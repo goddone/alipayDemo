@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>alipayDemo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+   </listener>
+  
+   <listener> 
+      <listener-class> 
+         org.springframework.web.util.Log4jConfigListener 
+      </listener-class> 
+   </listener>
+  
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+         /WEB-INF/services.xml
+         /WEB-INF/in-services.xml
+         /WEB-INF/to-services.xml
+    </param-value>
+  </context-param>
+  <context-param> 
+    <param-name> log4jConfigLocation</param-name> 
+    <param-value>/WEB-INF/log4j/log4j.properties</param-value> 
+  </context-param> 
+  <context-param> 
+    <param-name> log4jRefreshInterval</param-name> 
+    <param-value>6000</param-value> 
+   </context-param>
+  
+  <filter>
+    <display-name>RequestEncodeFitler</display-name>
+    <filter-name>RequestEncodeFitler</filter-name>
+    <filter-class>com.alipay.demo.filter.RequestEncodeFitler</filter-class>
+    <init-param>
+      <param-name>requestEncodeCode</param-name>
+      <param-value>GBK</param-value>
+    </init-param>
+    <init-param>
+      <param-name>responseEncodeCode</param-name>
+      <param-value>GBK</param-value>
+    </init-param>
+    <init-param>
+     <param-name>requestSrcEncodeCode</param-name>
+     <param-value>GBK</param-value>
+    </init-param>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>RequestEncodeFitler</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

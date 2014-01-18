@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:aop="http://www.springframework.org/schema/aop" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	   xmlns:tx="http://www.springframework.org/schema/tx" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+		
+		
+		<!-- 支付宝->商户请求服务执行引擎 -->
+		<bean id="inServiceEngine" class="com.alipay.demo.process.in.InServiceEngine"  autowire="byName" />
+	
+		
+		
+		<!-- 支付宝->商户请求服务处理工厂 -->
+		<bean id="inServiceExecutorFactory" class="com.alipay.demo.process.in.InServiceExecutorFactory" >
+		 <property name="executorList">
+		   <list>
+		       <ref local="inAlipayApplyAuthExecutor"/>
+		       <ref local="inAlipayDeleteBindExecutor"/>
+		       <ref local="inAlipayVerifygwExecutor"/>
+		       <ref local="inAlipayFollowExecutor"/>
+		       <ref local="inAlipayUnFollowExecutor"/>
+		       <ref local="inAlipayMenuMsgExecutor"/>
+		   </list>
+		 </property>
+		</bean>
+		
+		<!-- 支付宝->商户请求申请绑定外部户服务  -->
+		<bean id="inAlipayApplyAuthExecutor" class="com.alipay.demo.process.in.InAlipayApplyAuthExecutor" />
+		
+		<!-- 支付宝->商户删除绑定账户服务 -->
+		<bean id="inAlipayDeleteBindExecutor" class="com.alipay.demo.process.in.InAlipayDeleteBindExecutor" />
+		
+		<!-- 支付宝->商户网关验证服务 -->
+		<bean id="inAlipayVerifygwExecutor" class="com.alipay.demo.process.in.InAlipayVerifygwExecutor" />
+		
+		<!-- 支付宝->商户关注服务 -->
+		<bean id="inAlipayFollowExecutor" class="com.alipay.demo.process.in.InAlipayFollowExecutor" />
+		
+		<!-- 支付宝->商户取消关注服务 -->
+		<bean id="inAlipayUnFollowExecutor" class="com.alipay.demo.process.in.InAlipayUnFollowExecutor" />
+		
+		
+		<!-- 支付宝->商户菜单点击服务 -->
+		<bean id="inAlipayMenuMsgExecutor" class="com.alipay.demo.process.in.InAlipayMenuMsgExecutor" />
+
+ 
+</beans>

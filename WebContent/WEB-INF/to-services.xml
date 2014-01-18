@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:aop="http://www.springframework.org/schema/aop" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	   xmlns:tx="http://www.springframework.org/schema/tx" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+  
+     <!-- 对外执行引擎  -->
+    <bean id="toServiceEngine" class="com.alipay.demo.process.to.ToServiceEngine"  autowire="byName" />
+        
+    <!-- 执行器工厂 -->
+    <bean id="toServiceExecutorFactory" class="com.alipay.demo.process.to.ToServiceExecutorFactory">
+      <property name="executorList">
+         <list>
+           <ref local="toAlipayAddAccountExecutor"/>
+           <ref local="toAlipayMsgPushExecutor"/>
+         </list>
+      </property>
+    </bean>
+
+
+   <!-- 商户->支付宝绑定账户执行器 -->
+   <bean id="toAlipayAddAccountExecutor" class="com.alipay.demo.process.to.ToAlipayAddAccountExecutor" />
+ 
+   <!-- 商户->支付宝推送用户消息执行器 -->
+   <bean id="toAlipayMsgPushExecutor" class="com.alipay.demo.process.to.ToAlipayMsgPushExecutor" />
+ 
+ 
+</beans>
