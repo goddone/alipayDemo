@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
+<meta name="viewport" content="width=device-width, user-scalable=yes" />
 <title>支付宝-少卿外部户绑定页面</title>
 </head>
 <body>
